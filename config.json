@@ -1,0 +1,33 @@
+{
+	"system": {
+		"gin_rent": "전세가 시세",
+	   "gin_rent_cal": "전세가 증감액",
+	   "gin_trade_rent_cal": "매전차액",
+	   "pk_ent_master": 0,
+	   "total_num_of_family": "총세대수",
+	   "private_extent": "전용면적",
+	   "gin_trade_flag": "매매가 증감여부",
+	   "gin_rent_flag": "전세가 증감여부",
+	   "house_cnt": "세대수",
+	   "gin_rent_flag": "even",
+	   "bldg_nm": "단지명",
+	   "gin_rent_per": "전세가율",
+	   "gin_trade": "매매가 시세",
+	   "pk_apt_detail": 324,
+	   "pk_kab_master": 50335,
+	   "supply_extent": "공급면적",
+	   "year_diff": "준공연차",
+	   "search_dt": "준공연월",
+	   "fav": 0,
+	   "pk_apt_master": 94,
+	   "unsold_cnt": 0,
+	   "gin_trade_cal": "매매가 증감액"
+	},
+
+	"raw_data": {
+		"location":
+		{
+			"성동구": "estate_sample.json"
+		}
+	}
+}
