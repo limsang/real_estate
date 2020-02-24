@@ -1,5 +1,5 @@
 {
-	"system": {
+	"table_name": {
 		"gin_rent": "전세가 시세",
 	   "gin_rent_cal": "전세가 증감액",
 	   "gin_trade_rent_cal": "매전차액",
@@ -27,7 +27,8 @@
 	"raw_data": {
 		"location":
 		{
-			"성동구": "estate_sample.json"
+			"성동구": "estate_sample.json",
+			"강남구": "estate_sample.json"
 		}
 	}
 }

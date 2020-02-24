@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 fileLocation = "estate_sample_test.json"
 # fileLocation = "config.json"
 
+
 class Calculator(object):
 
     def __init__(self):
@@ -19,11 +20,8 @@ class Calculator(object):
         self.readFiles()
         self.calc_()
 
-
-
+    # todo "구" 단위로 mp사용해서 데이터 처리
     def calc_(self):
-
-
         # todo 조건값들 config로 관리, None값들 처리 어떻게 할지???
         try:
             for key in self._raw:
