@@ -5,36 +5,85 @@ from collections import OrderedDict
 import sys
 import pandas as pd
 import time
+from config import config
 import matplotlib.pyplot as plt
-#todo manage with config.json
-fileLocation = "estate_sample_test.json"
-# fileLocation = "config.json"
 
 
 class Calculator(object):
 
     def __init__(self):
-        self._fileLocation = "estate_sample_test.json"
+        self._fileLocation = config()._json_data["raw_data"]["location"]["성동구"]
         self._raw = dict()
         self.filtered_data = dict()
+
         self.readFiles()
         self.calc_()
+        self.save_as_json("성동구", self._raw)
 
-    # todo "구" 단위로 mp사용해서 데이터 처리
+    """
+    key = raw_data
+    condition = treating condition of value "null"  
+    """
+    def filter(self, key, condition):
+        # 조건주고 맞으면 True, 아니면 False 리턴하도록
+        PRIVATE_EXTENT = config()._json_data["filter_table"]["전용면적"]
+        GIN_TRADE_RENT_CAL = config()._json_data["filter_table"]["매전차액"]
+        GIN_RENT_PER = config()._json_data["filter_table"]["전세가율"]
+
+        if condition is True:
+            if self._raw[key]["private_extent"] is not None and self._raw[key]["gin_trade_rent_cal"] is not None and self._raw[key]["gin_rent_per"] is not None:
+                if (self._raw[key]["private_extent"] > PRIVATE_EXTENT) and (self._raw[key]["gin_trade_rent_cal"] < GIN_TRADE_RENT_CAL) and (self._raw[key]["gin_rent_per"] > GIN_RENT_PER):
+                    return True
+                else:
+                    return False
+        else:
+            return True
+
+    # todo "구" 단위로 mp 사용해서 데이터 처리
     def calc_(self):
         # todo 조건값들 config로 관리, None값들 처리 어떻게 할지???
         try:
+            idx = 0
             for key in self._raw:
-                if (self._raw[key]["gin_trade"] < 50000) and (self._raw[key]["house_cnt"] > 0) and (self._raw[key]["gin_rent_per"] > 60) :
-                    print(self._raw[key]["bldg_nm"])
+                if self.filter(key, True):
+                    tmp = dict()
+                    tmp["total_num_of_family"] = self._raw[key]['total_num_of_family']
+                    tmp["gin_trade_flag"] = self._raw[key]['gin_trade_flag']
+                    tmp["gin_rent_per"] = self._raw[key]['gin_rent_per']
+                    tmp["house_cnt"] = self._raw[key]['house_cnt']
+                    tmp["bldg_nm"] = self._raw[key]['bldg_nm']
+                    tmp["gin_trade"] = self._raw[key]['gin_trade']
+                    tmp["gin_rent_per"] = self._raw[key]['gin_rent_per']
+                    tmp["year_diff"] = self._raw[key]['year_diff']
+                    tmp["gin_trade_cal"] = self._raw[key]['gin_trade_cal']
+                    tmp["unsold_cnt"] = self._raw[key]['unsold_cnt']
+                    tmp["gin_rent"] = self._raw[key]['gin_rent']
+                    tmp["gin_rent_cal"] = self._raw[key]['gin_rent_cal']
+                    self.filtered_data[str(idx)] = tmp
+                    idx += 1
+
         except Exception as e:
             print("calc_ error", e)
             sys.exit()
 
-    def save_as_csv(self):
+    def save_as_json(self, location, raw_data):
+        try:
+            pwd = os.getcwd()
+            today = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
+            filename = "/report/" + today + location + ".json"
+            dir = pwd + filename
+
+            with open(dir, 'w', encoding="utf-8") as f:
+                json.dump(self.filtered_data, f, ensure_ascii=False, indent="\t")
+
+            # mapogu_table.to_csv(dir, sep='\t', encoding='utf-8')
+        except Exception as e:
+            print("save_as_json error", e)
+
+    def save_as_csv(self, location):
         try:
             today = time.strftime('%Y-%m-%d', time.localtime(time.time()))
-            filename = "/"+ today + "location.tsv"
+            filename = "/" + today + location + ".tsv"
             pwd = os.getcwd()
             dir = pwd + filename
 

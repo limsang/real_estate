@@ -1,9 +1,15 @@
 {
+
+	"system":
+	{
+		"file_location":"estate_sample_test.json"
+	},
+
 	"table_name": {
 		"gin_rent": "전세가 시세",
 	   "gin_rent_cal": "전세가 증감액",
 	   "gin_trade_rent_cal": "매전차액",
-	   "pk_ent_master": 0,
+	   "pk_ent_master": "pk_ent_master",
 	   "total_num_of_family": "총세대수",
 	   "private_extent": "전용면적",
 	   "gin_trade_flag": "매매가 증감여부",
@@ -13,22 +19,47 @@
 	   "bldg_nm": "단지명",
 	   "gin_rent_per": "전세가율",
 	   "gin_trade": "매매가 시세",
-	   "pk_apt_detail": 324,
-	   "pk_kab_master": 50335,
+	   "pk_apt_detail": "pk_apt_detail",
+	   "pk_kab_master": "pk_kab_master",
 	   "supply_extent": "공급면적",
 	   "year_diff": "준공연차",
 	   "search_dt": "준공연월",
-	   "fav": 0,
-	   "pk_apt_master": 94,
-	   "unsold_cnt": 0,
+	   "fav": "fav",
+	   "pk_apt_master": "pk_apt_master",
+	   "unsold_cnt": "unsold_cnt",
 	   "gin_trade_cal": "매매가 증감액"
+	},
+
+	"filter_table": {
+		"전세가 시세": 10000,
+	   "전세가 증감액": 10000,
+	   "매전차액": 10000,
+	   "총세대수": 1000,
+	   "전용면적": 10000,
+	   "매매가 증감여부": 1,
+	   "전세가 증감여부": 1,
+	   "세대수": 1000,
+	   "전세가율": 100,
+	   "매매가 시세": 10000,
+	   "공급면적": 10000,
+	   "준공연차": 10000,
+	   "준공연월": 10000,
+	   "매매가 증감액": 10000
 	},
 
 	"raw_data": {
 		"location":
 		{
-			"성동구": "estate_sample.json",
-			"강남구": "estate_sample.json"
+			"성동구": "data/성동구.json",
+			"강남구": "data/강남구.json",
+			"서초구": "data/서초구.json",
+			"과천시": "data/과천시.json",
+			"중구": "data/중구.json",
+			"영등포구": "data/영등포구.json",
+			"용산구": "data/용산구.json",
+			"분당구": "data/분당구.json",
+			"송파구": "data/송파구.json",
+			"마포구": "data/마포구.json"
 		}
 	}
 }
